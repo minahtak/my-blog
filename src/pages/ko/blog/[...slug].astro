@@ -1,16 +1,16 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import BlogPost from '../../../layouts/BlogPost.astro'; // 경로 주의 (한 단계 더 깊음)
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
     
-    // 1. 영어 글(en/)만 필터링
-    // 2. slug에서 'en/' 제거 (URL을 /blog/my-post 로 만들기 위함)
+    // 1. 한국어 글(ko/)만 필터링
+    // 2. slug에서 'ko/' 제거
     return posts
-        .filter(post => post.id.startsWith('en/'))
+        .filter(post => post.id.startsWith('ko/'))
         .map((post) => ({
-            params: { slug: post.id.replace('en/', '') }, 
+            params: { slug: post.id.replace('ko/', '') },
             props: post,
         }));
 }
@@ -18,6 +18,7 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
+
 ---
 
 <BlogPost {...post.data}>

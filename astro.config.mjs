@@ -8,4 +8,12 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap()],
+
+	i18n: {
+		defaultLocale: 'en', // 기본 언어 영어
+		locales: ['en', 'ko'], // 지원할 언어 목록
+		routing: {
+			prefixDefaultLocale: false,
+		}
+	}
 });

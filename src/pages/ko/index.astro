@@ -1,0 +1,124 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_DESCRIPTION } from '../../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} /> -->
+		<BaseHead title='Home | Minah Tak' description={SITE_DESCRIPTION}>
+		<style>
+			main {
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 3rem 1.5rem;
+			}
+			/* Hero Section */
+			.hero {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				gap: 1.5rem;
+				margin-bottom: 5rem;
+			}
+			.profile-image {
+				width: 140px;
+				height: 140px;
+				border-radius: 50%;
+				object-fit: cover;
+				background-color: #eee;
+				border: 3px solid #f2e8df; /* 따뜻한 베이지 테두리 */
+			}
+			.hero h1 {
+				font-size: 2.5rem;
+				margin: 0;
+				color: #333;
+			}
+			.hero p {
+				font-size: 1.2rem;
+				color: #666;
+				line-height: 1.6;
+				max-width: 600px;
+			}
+			.highlight {
+				color: #C66B3D; /* 포인트 컬러 */
+				font-weight: 600;
+			}
+
+			/* Category Cards */
+			.sections-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 1.5rem;
+			}
+			.card {
+				background: #fff;
+				padding: 2rem;
+				border-radius: 16px;
+				text-decoration: none;
+				color: inherit;
+				border: 1px solid #f0f0f0;
+				transition: all 0.3s ease;
+			}
+			.card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 10px 25px rgba(198, 107, 61, 0.1);
+				border-color: #C66B3D;
+			}
+			.card h3 {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.25rem;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			.card p {
+				margin: 0;
+				font-size: 0.95rem;
+				color: #777;
+				line-height: 1.5;
+			}
+
+			@media (max-width: 720px) {
+				.hero h1 { font-size: 2rem; }
+				.hero p { font-size: 1.1rem; }
+			}
+		</style>
+	</head>
+	<body style="background-color: #FCF9F6;">
+		<Header />
+		<main>
+			<section class="hero">
+				<img src="../../src/assets/MinahTak_Profile.jpg" alt="Minah Tak" class="profile-image" />
+				<h1>Hi, I'm <span class="highlight">Minah</span>.</h1>
+				<p>
+					I am a builder and thinker based in Israel, driven by the intersection of 
+					<strong>Economics, Management, and Technology</strong>. 
+					I believe in creating value through strategic thinking and digital innovation.
+				</p>
+
+			</section>
+
+			<section class="sections-grid">
+				<a href="/ko/blog" class="card">
+					<h3>📝 Thoughts</h3>
+					<p>경제와 경영, 그리고 기술에 대한 저의 통찰을 기록합니다.</p>
+				</a>
+				<a href="/projects" class="card">
+					<h3>🚀 Projects</h3>
+					<p>데이터와 비즈니스 로직을 통해 만들어낸 결과물들입니다.</p>
+				</a>
+				<a href="/about" class="card">
+					<h3>☕ About Me</h3>
+					<p>이스라엘에서의 삶과 저의 가치관에 대해 더 자세히 소개합니다.</p>
+				</a>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
