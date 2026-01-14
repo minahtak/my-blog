@@ -8,116 +8,325 @@ import { SITE_DESCRIPTION } from '../../consts';
 <!doctype html>
 <html lang="en">
 	<head>
-		<!-- <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} /> -->
-		<BaseHead title='Home | Minah Tak' description={SITE_DESCRIPTION}>
+		<BaseHead title='Minah Tak' description={SITE_DESCRIPTION} />
 		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+			
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #ffffff;
+				color: #000000;
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+				line-height: 1.6;
+			}
+
 			main {
 				width: 100%;
-				max-width: 800px;
+				max-width: 900px;
 				margin: 0 auto;
-				padding: 3rem 1.5rem;
+				padding: 8rem 2rem 4rem;
+				min-height: 80vh;
 			}
+
 			/* Hero Section */
 			.hero {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				text-align: center;
-				gap: 1.5rem;
-				margin-bottom: 5rem;
+				margin-bottom: 8rem;
+				display: grid;
+				grid-template-columns: 1fr 200px;
+				gap: 4rem;
+				align-items: start;
 			}
-			.profile-image {
-				width: 140px;
-				height: 140px;
+
+			.hero-content {
+				padding-top: 1rem;
+			}
+
+			.hero-image-container {
+				position: relative;
+			}
+
+			.hero-image {
+				width: 200px;
+				height: 200px;
 				border-radius: 50%;
 				object-fit: cover;
-				background-color: #eee;
-				border: 3px solid #f2e8df; /* 따뜻한 베이지 테두리 */
-			}
-			.hero h1 {
-				font-size: 2.5rem;
-				margin: 0;
-				color: #333;
-			}
-			.hero p {
-				font-size: 1.2rem;
-				color: #666;
-				line-height: 1.6;
-				max-width: 600px;
-			}
-			.highlight {
-				color: #C66B3D; /* 포인트 컬러 */
-				font-weight: 600;
+				border: 3px solid #000000;
+				box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.08);
 			}
 
-			/* Category Cards */
-			.sections-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-				gap: 1.5rem;
+			.hero-image-decoration {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				border: 2px solid #000000;
+				border-radius: 50%;
+				top: -15px;
+				left: -15px;
+				z-index: -1;
 			}
-			.card {
-				background: #fff;
-				padding: 2rem;
-				border-radius: 16px;
+
+			.hero-title {
+				font-family: 'Playfair Display', Georgia, serif;
+				font-size: clamp(3.5rem, 10vw, 7rem);
+				font-weight: 400;
+				letter-spacing: -0.02em;
+				line-height: 1.1;
+				margin-bottom: 3rem;
+				color: #000000;
+			}
+
+			.hero-description {
+				font-size: 1.125rem;
+				font-weight: 300;
+				line-height: 1.8;
+				max-width: 600px;
+				color: #333333;
+				margin-bottom: 2rem;
+			}
+
+			.hero-cta {
+				display: inline-block;
+				padding: 0.875rem 2rem;
+				background-color: #000000;
+				color: #ffffff;
+				text-decoration: none;
+				font-size: 0.9rem;
+				font-weight: 400;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+				transition: all 0.3s ease;
+				border: 2px solid #000000;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.hero-cta::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background-color: #ffffff;
+				transition: left 0.3s ease;
+				z-index: 0;
+			}
+
+			.hero-cta:hover::before {
+				left: 0;
+			}
+
+			.hero-cta:hover {
+				color: #000000;
+			}
+
+			.hero-cta span {
+				position: relative;
+				z-index: 1;
+			}
+
+			.hero-stats {
+				display: flex;
+				gap: 3rem;
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 1px solid #e0e0e0;
+			}
+
+			.stat-item {
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+			}
+
+			.stat-number {
+				font-family: 'Playfair Display', Georgia, serif;
+				font-size: 2rem;
+				font-weight: 600;
+				color: #000000;
+			}
+
+			.stat-label {
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				font-size: 0.75rem;
+				color: #999999;
+			}
+
+			/* Navigation Grid */
+			.nav-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1px;
+				background-color: #e0e0e0;
+				border: 1px solid #e0e0e0;
+				margin-bottom: 6rem;
+			}
+
+			.nav-card {
+				background: #ffffff;
+				padding: 3rem 2rem;
 				text-decoration: none;
 				color: inherit;
-				border: 1px solid #f0f0f0;
 				transition: all 0.3s ease;
-			}
-			.card:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 10px 25px rgba(198, 107, 61, 0.1);
-				border-color: #C66B3D;
-			}
-			.card h3 {
-				margin: 0 0 0.5rem 0;
-				font-size: 1.25rem;
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-			}
-			.card p {
-				margin: 0;
-				font-size: 0.95rem;
-				color: #777;
-				line-height: 1.5;
+				position: relative;
+				overflow: hidden;
 			}
 
-			@media (max-width: 720px) {
-				.hero h1 { font-size: 2rem; }
-				.hero p { font-size: 1.1rem; }
+			.nav-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 0;
+				height: 2px;
+				background: #000000;
+				transition: width 0.3s ease;
+			}
+
+			.nav-card:hover::before {
+				width: 100%;
+			}
+
+			.nav-card:hover {
+				background: #fafafa;
+			}
+
+			.nav-card h3 {
+				font-family: 'Playfair Display', Georgia, serif;
+				font-size: 1.75rem;
+				font-weight: 400;
+				margin-bottom: 0.75rem;
+				color: #000000;
+			}
+
+			.nav-card p {
+				font-size: 0.9rem;
+				font-weight: 300;
+				color: #666666;
+				line-height: 1.6;
+			}
+
+			/* Footer note */
+			.footer-note {
+				text-align: center;
+				font-size: 0.875rem;
+				color: #999999;
+				font-weight: 300;
+				padding: 4rem 0;
+				border-top: 1px solid #e0e0e0;
+			}
+
+			@media (max-width: 768px) {
+				main {
+					padding: 4rem 1.5rem 3rem;
+				}
+
+				.hero {
+					grid-template-columns: 1fr;
+					gap: 3rem;
+				}
+
+				.hero-image-container {
+					order: -1;
+					margin: 0 auto;
+				}
+
+				.hero-image {
+					width: 150px;
+					height: 150px;
+				}
+
+				.hero-title {
+					margin-bottom: 2rem;
+				}
+
+				.hero-stats {
+					flex-wrap: wrap;
+					gap: 2rem;
+				}
+
+				.nav-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.nav-card {
+					padding: 2.5rem 1.5rem;
+				}
 			}
 		</style>
 	</head>
-	<body style="background-color: #FCF9F6;">
+	<body>
 		<Header />
 		<main>
 			<section class="hero">
-				<img src="../../src/assets/MinahTak_Profile.jpg" alt="Minah Tak" class="profile-image" />
-				<h1>Hi, I'm <span class="highlight">Minah</span>.</h1>
-				<p>
-					I am a builder and thinker based in Israel, driven by the intersection of 
-					<strong>Economics, Management, and Technology</strong>. 
-					I believe in creating value through strategic thinking and digital innovation.
-				</p>
+				<div class="hero-content">
+					<h1 class="hero-title">Minah Tak</h1>
+					
+					<p class="hero-description">
+						공부하면서 이것저것 만드는 학생입니다.
+						아이디어만 잔뜩 있고 실력은 키우는 중이에요.
+						코드도 굽고(?) 쿠키도 굽고,
+						망해본 경험도 차곡차곡 기록합니다.
+					</p>
 
+					<a href="/me" class="hero-cta">
+						<span>The Full Story →</span>
+					</a>
+
+					<div class="hero-stats">
+						<div class="stat-item">
+							<div class="stat-number">∞</div>
+							<div class="stat-label">Questions</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number">v1.0</div>
+							<div class="stat-label">Always</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number">0→1</div>
+							<div class="stat-label">Mindset</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="hero-image-container">
+					<div class="hero-image-decoration"></div>
+					<img 
+						src="../../src/assets/MinahTak_Profile.jpg" 
+						alt="Minah Tak" 
+						class="hero-image"
+					/>
+				</div>
 			</section>
 
-			<section class="sections-grid">
-				<a href="/ko/blog" class="card">
-					<h3>📝 Thoughts</h3>
-					<p>경제와 경영, 그리고 기술에 대한 저의 통찰을 기록합니다.</p>
+			<nav class="nav-grid">
+				<a href="/explore" class="nav-card">
+					<h3>Explore</h3>
+					<p>새벽 탐험, 샤워 중 번뜩인 생각들, 잠 못 이루게 만드는 질문들</p>
 				</a>
-				<a href="/projects" class="card">
-					<h3>🚀 Projects</h3>
-					<p>데이터와 비즈니스 로직을 통해 만들어낸 결과물들입니다.</p>
+
+				<a href="/builds" class="nav-card">
+					<h3>Builds</h3>
+					<p>반쯤 구운 아이디어를 현실로. 어떤 건 되고, 어떤 건 안 되고. 그래도 배워가는 중!</p>
 				</a>
-				<a href="/about" class="card">
-					<h3>☕ About Me</h3>
-					<p>이스라엘에서의 삶과 저의 가치관에 대해 더 자세히 소개합니다.</p>
+
+				<a href="/ko/blog" class="nav-card">
+					<h3>Logs</h3>
+					<p>일상 기록 : 타버린 식빵, 버그투성이 코드, 그 사이 모든 순간</p>
 				</a>
-			</section>
+
+				<a href="/me" class="nav-card">
+					<h3>About me</h3>
+					<p>코딩 안 할 때의 모습. (아마 여전히 디버깅 중일 확률 99%)</p>
+				</a>
+			</nav>
+
 		</main>
 		<Footer />
 	</body>
