@@ -1,0 +1,286 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="Me — Minah Tak" description={SITE_DESCRIPTION} />
+    <style>
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #ffffff;
+        color: #000000;
+        line-height: 1.7;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 8rem 2rem 4rem;
+      }
+
+      /* Hero */
+      .me-hero {
+        margin-bottom: 6rem;
+      }
+
+      .me-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+      }
+
+      .me-subtitle {
+        font-size: 1.15rem;
+        font-weight: 300;
+        color: #444;
+        max-width: 650px;
+      }
+
+      /* Sections */
+      .section {
+        margin-bottom: 6rem;
+      }
+
+      .section-header {
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-desc {
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: #666;
+      }
+
+      /* Content blocks */
+      .text-block {
+        max-width: 720px;
+        font-size: 1rem;
+        font-weight: 300;
+        color: #333;
+      }
+
+      .text-block p {
+        margin-bottom: 1.25rem;
+      }
+
+      /* Values grid */
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .value-card {
+        border: 1px solid #e0e0e0;
+        padding: 1.5rem 1.75rem;
+        transition: all 0.25s ease;
+      }
+
+      .value-card:hover {
+        border-color: #000;
+        transform: translateY(-4px);
+      }
+
+      .value-title {
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 0.75rem;
+      }
+
+      .value-text {
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: #333;
+      }
+
+      /* Divider */
+      .divider {
+        margin: 6rem 0;
+        height: 1px;
+        background: #e0e0e0;
+      }
+
+      /* Experience list */
+      .experience-list {
+        max-width: 720px;
+      }
+
+      .experience-item {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: #333;
+      }
+
+      .experience-item span {
+        color: #999;
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 768px) {
+        main {
+          padding: 4rem 1.5rem 3rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <!-- HERO -->
+      <section class="me-hero">
+        <h1 class="me-title">Me</h1>
+        <p class="me-subtitle">
+          Builder, learner, and someone who enjoys the process a little too much.
+        </p>
+      </section>
+
+      <!-- INTRO -->
+      <section class="section">
+        <div class="text-block">
+          <p>
+            I’m <strong>Minah Tak</strong>, a Korean student currently studying in
+            <strong>Israel</strong>. I move between languages, cultures, and systems
+            almost daily—and I’ve grown to enjoy the friction that comes with it.
+          </p>
+          <p>
+            I like building things. Sometimes with code, sometimes with bread,
+            sometimes with a camera. What matters to me isn’t just the final result,
+            but the messy middle—where things break, assumptions fail, and learning
+            actually happens.
+          </p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- BACKGROUND -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Background</h2>
+          <p class="section-desc">
+            Where I come from, and how I ended up here.
+          </p>
+        </div>
+
+        <div class="text-block">
+          <p>
+            I was born and raised in South Korea. Early on, I realized I was less
+            interested in following a fixed path and more curious about how systems
+            work—technical systems, social systems, and the invisible rules behind
+            everyday experiences.
+          </p>
+          <p>
+            That curiosity took me abroad. I spent time in the UK studying English,
+            and I’m now in Jerusalem, studying at the Hebrew University through an
+            international preparatory program focused on business and economics.
+          </p>
+          <p>
+            Living abroad has trained me to observe first, adapt quickly, and stay
+            comfortable with not fully understanding things—yet.
+          </p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- VALUES -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Values & Attitude</h2>
+          <p class="section-desc">
+            Principles I try to build with.
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-title">Curiosity</div>
+            <div class="value-text">
+              I ask questions before jumping to solutions.
+            </div>
+          </div>
+
+          <div class="value-card">
+            <div class="value-title">Process over polish</div>
+            <div class="value-text">
+              I care more about learning fast than looking perfect.
+            </div>
+          </div>
+
+          <div class="value-card">
+            <div class="value-title">Systems thinking</div>
+            <div class="value-text">
+              I enjoy understanding how small decisions scale.
+            </div>
+          </div>
+
+          <div class="value-card">
+            <div class="value-title">Consistency</div>
+            <div class="value-text">
+              Small, repeated effort beats bursts of motivation.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- LIFE & WORK -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Life & Work</h2>
+          <p class="section-desc">
+            Things I’ve done, places I’ve worked, lessons I keep.
+          </p>
+        </div>
+
+        <div class="experience-list">
+          <div class="experience-item">
+            Worked as a barista and sandwich artist in busy cafés and restaurants
+            <br />
+            <span>Learning speed, responsibility, and calm under pressure</span>
+          </div>
+
+          <div class="experience-item">
+            Built and ran a YouTube channel sharing life as a Korean student in Israel
+            <br />
+            <span>Planning, filming, editing, and publishing independently</span>
+          </div>
+
+          <div class="experience-item">
+            Studied backend development with Java & Spring
+            <br />
+            <span>Team projects, communication, and problem-solving</span>
+          </div>
+
+          <div class="experience-item">
+            Designed posters and digital content for a city library
+            <br />
+            <span>Visual communication and public engagement</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
