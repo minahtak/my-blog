@@ -34,7 +34,7 @@ const posts = (await getCollection('blog'))
 
 			main {
 				width: 100%;
-				max-width: 900px;
+				max-width: 1200px;
 				margin: 0 auto;
 				padding: 8rem 2rem 4rem;
 				min-height: 80vh;
@@ -69,11 +69,110 @@ const posts = (await getCollection('blog'))
 
 			/* Posts Grid */
 			.posts-grid {
-				display: grid;
-				gap: 2.5rem;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			/* Featured Post (First Post) */
+			.post-card.featured {
+				display: block;
+				text-decoration: none;
+				color: inherit;
+				transition: all 0.3s ease;
+				margin-bottom: 4rem;
+				padding-bottom: 4rem;
+				border-bottom: 1px solid #e0e0e0;
+				max-width: 720px;
+				width: 100%;
+			}
+
+			.post-card.featured:hover {
+				transform: translateY(-2px);
+			}
+
+			.post-card.featured .post-image-container {
+				position: relative;
+				margin-bottom: 1.5rem;
+				overflow: hidden;
+				border: 1px solid #e0e0e0;
+				border-radius: 8px;
+				aspect-ratio: 4 / 3;
+				max-height: 360px;
+			}
+
+			.post-card.featured .post-image-container::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 0;
+				height: 2px;
+				background: #000000;
+				transition: width 0.3s ease;
+			}
+
+			.post-card.featured:hover .post-image-container::after {
+				width: 100%;
+			}
+
+			.post-card.featured .post-image-container img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+				transition: transform 0.3s ease;
+			}
+
+			.post-card.featured:hover .post-image-container img {
+				transform: scale(1.02);
+			}
+
+			.post-card.featured .post-content {
+				padding: 0 0.5rem;
+			}
+
+			.post-card.featured .post-date {
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				font-size: 0.75rem;
+				color: #999999;
+				margin-bottom: 0.75rem;
+				display: block;
+			}
+
+			.post-card.featured .post-title {
+				font-family: 'Playfair Display', Georgia, serif;
+				font-size: 2rem;
+				font-weight: 400;
+				line-height: 1.2;
+				color: #000000;
+				margin: 0 0 1rem 0;
+				transition: color 0.3s ease;
+			}
+
+			.post-card.featured:hover .post-title {
+				color: #666666;
+			}
+
+			.post-card.featured .post-excerpt {
+				font-size: 1rem;
+				font-weight: 300;
+				color: #666666;
+				line-height: 1.7;
+			}
+
+			/* Regular Posts Grid (2 columns) */
+			.regular-posts {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 2.5rem 2rem;
+				max-width: 960px;
+				margin: 0 auto;
+				width: 100%;
 			}
 
 			.post-card {
@@ -81,7 +180,6 @@ const posts = (await getCollection('blog'))
 				text-decoration: none;
 				color: inherit;
 				transition: all 0.3s ease;
-				position: relative;
 			}
 
 			.post-card:hover {
@@ -93,6 +191,8 @@ const posts = (await getCollection('blog'))
 				margin-bottom: 1rem;
 				overflow: hidden;
 				border: 1px solid #e0e0e0;
+				border-radius: 8px;
+				aspect-ratio: 4 / 3;
 			}
 
 			.post-image-container::after {
@@ -112,7 +212,7 @@ const posts = (await getCollection('blog'))
 
 			.post-image-container img {
 				width: 100%;
-				height: 240px;
+				height: 100%;
 				object-fit: cover;
 				display: block;
 				transition: transform 0.3s ease;
@@ -149,30 +249,6 @@ const posts = (await getCollection('blog'))
 				color: #666666;
 			}
 
-			/* Featured Post (First Post) */
-			.post-card.featured {
-				padding-bottom: 2.5rem;
-				margin-bottom: 1.5rem;
-				border-bottom: 1px solid #e0e0e0;
-			}
-
-			.post-card.featured .post-image-container img {
-				height: 360px;
-			}
-
-			.post-card.featured .post-title {
-				font-size: 2rem;
-				margin-bottom: 0.75rem;
-			}
-
-			.post-card.featured .post-excerpt {
-				font-size: 0.95rem;
-				font-weight: 300;
-				color: #666666;
-				line-height: 1.7;
-				margin-top: 0.75rem;
-			}
-
 			/* Empty State */
 			.empty-state {
 				text-align: center;
@@ -185,6 +261,13 @@ const posts = (await getCollection('blog'))
 				font-weight: 300;
 			}
 
+			@media (max-width: 968px) {
+				.regular-posts {
+					grid-template-columns: 1fr;
+					gap: 2.5rem;
+				}
+			}
+
 			@media (max-width: 768px) {
 				main {
 					padding: 4rem 1.5rem 3rem;
@@ -195,24 +278,25 @@ const posts = (await getCollection('blog'))
 					padding-bottom: 2rem;
 				}
 
-				.posts-grid {
-					gap: 2rem;
-				}
-
-				.post-image-container img {
-					height: 200px !important;
-				}
-
-				.post-card.featured .post-image-container img {
-					height: 260px !important;
+				.post-card.featured {
+					margin-bottom: 3rem;
+					padding-bottom: 3rem;
 				}
 
 				.post-card.featured .post-title {
 					font-size: 1.65rem;
 				}
 
+				.post-card.featured .post-excerpt {
+					font-size: 0.95rem;
+				}
+
 				.post-title {
-					font-size: 1.2rem;
+					font-size: 1.25rem;
+				}
+
+				.regular-posts {
+					gap: 2rem;
 				}
 			}
 		</style>
@@ -234,17 +318,17 @@ const posts = (await getCollection('blog'))
 					</div>
 				) : (
 					<ul class="posts-grid">
-						{posts.map((post, index) => (
+						{posts.slice(0, 1).map((post) => (
 							<li>
 								<a 
 									href={`/blog/${post.id.replace('en/', '')}/`} 
-									class={index === 0 ? 'post-card featured' : 'post-card'}
+									class="post-card featured"
 								>
 									{post.data.heroImage && (
 										<div class="post-image-container">
 											<Image 
-												width={900} 
-												height={index === 0 ? 480 : 360} 
+												width={720} 
+												height={540} 
 												src={post.data.heroImage} 
 												alt={post.data.title}
 											/>
@@ -255,7 +339,7 @@ const posts = (await getCollection('blog'))
 											<FormattedDate date={post.data.pubDate} />
 										</time>
 										<h2 class="post-title">{post.data.title}</h2>
-										{index === 0 && post.data.description && (
+										{post.data.description && (
 											<p class="post-excerpt">{post.data.description}</p>
 										)}
 									</div>
@@ -263,6 +347,34 @@ const posts = (await getCollection('blog'))
 							</li>
 						))}
 					</ul>
+				)}
+
+				{posts.length > 1 && (
+					<div class="regular-posts">
+						{posts.slice(1).map((post) => (
+							<a 
+								href={`/blog/${post.id.replace('en/', '')}/`} 
+								class="post-card"
+							>
+								{post.data.heroImage && (
+									<div class="post-image-container">
+										<Image 
+											width={480} 
+											height={360} 
+											src={post.data.heroImage} 
+											alt={post.data.title}
+										/>
+									</div>
+								)}
+								<div class="post-content">
+									<time class="post-date">
+										<FormattedDate date={post.data.pubDate} />
+									</time>
+									<h2 class="post-title">{post.data.title}</h2>
+								</div>
+							</a>
+						))}
+					</div>
 				)}
 			</section>
 		</main>

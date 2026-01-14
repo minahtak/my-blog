@@ -35,7 +35,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 			main {
 				width: 100%;
-				margin: 0;
+				max-width: 1200px;
+				margin: 0 auto;
 				padding: 0;
 				flex: 1;
 			}
@@ -47,15 +48,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			/* Hero Section */
 			.hero-image {
 				width: 100%;
-				max-height: 500px;
+				max-width: 720px;
+				margin: 8rem auto 4rem;
 				overflow: hidden;
-				margin-bottom: 4rem;
-				border-bottom: 1px solid #e0e0e0;
+				border: 1px solid #e0e0e0;
+				border-radius: 8px;
 			}
 
 			.hero-image img {
 				width: 100%;
-				height: 500px;
+				height: auto;
+				max-height: 480px;
 				object-fit: cover;
 				display: block;
 			}
@@ -66,6 +69,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin: 0 auto 4rem;
 				padding: 0 2rem;
 				text-align: center;
+			}
+
+			/* Add top margin when there's no hero image */
+			.article-header.no-hero {
+				margin-top: 8rem;
 			}
 
 			.article-meta {
@@ -188,7 +196,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.prose :global(pre) {
 				background: #f5f5f5;
 				padding: 1.5rem;
-				border-radius: 4px;
+				border-radius: 8px;
 				overflow-x: auto;
 				margin: 2rem 0;
 				border: 1px solid #e0e0e0;
@@ -213,7 +221,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				max-width: 100%;
 				height: auto;
 				margin: 2rem 0;
-				border-radius: 4px;
+				border-radius: 8px;
 				border: 1px solid #e0e0e0;
 			}
 
@@ -255,16 +263,24 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 			@media (max-width: 768px) {
 				.hero-image {
+					margin-top: 4rem;
 					margin-bottom: 3rem;
+					border-radius: 0;
+					border-left: none;
+					border-right: none;
 				}
 
 				.hero-image img {
-					height: 300px;
+					max-height: 300px;
 				}
 
 				.article-header {
 					margin-bottom: 3rem;
 					padding: 0 1.5rem;
+				}
+
+				.article-header.no-hero {
+					margin-top: 4rem;
 				}
 
 				.prose {
@@ -293,11 +309,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			<article>
 				{heroImage && (
 					<div class="hero-image">
-						<Image width={1440} height={500} src={heroImage} alt={title} />
+						<Image width={720} height={480} src={heroImage} alt={title} />
 					</div>
 				)}
 				
-				<header class="article-header">
+				<header class:list={["article-header", { "no-hero": !heroImage }]}>
 					<div class="article-meta">
 						<time class="article-date">
 							<FormattedDate date={pubDate} />
