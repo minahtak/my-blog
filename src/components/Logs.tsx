@@ -58,7 +58,7 @@ const Logs: React.FC<{ lang: Language }> = ({ lang }) => {
               {selectedLog.longContent ? selectedLog.longContent[lang] : selectedLog.content[lang]}
             </div>
           </div>
-          {/* ------------------------------------------- */}
+          {/* -------------------------------------------- */}
 
         </article>
       </div>
