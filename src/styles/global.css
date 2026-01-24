@@ -1,230 +1,204 @@
-/*
-  Minimalist Black & White Design System
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
-
-:root {
-	--accent: #000000;
-	--accent-dark: #000000;
-	--black: 0, 0, 0;
-	--gray: 102, 102, 102;
-	--gray-light: 240, 240, 240;
-	--gray-dark: 51, 51, 51;
-	--gray-gradient: rgba(255, 255, 255, 1), rgba(250, 250, 250, 1);
-	--box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-	--border-color: #e0e0e0;
-}
+/* Tailwind는 자동으로 로드되므로 @tailwind 지시문 제거 */
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Google Fonts에서 명조체와 고딕체 호출 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Pretendard:wght@300;400;600&display=swap');
+
+body {
+  /* 기본 폰트를 Pretendard로 설정하여 전반적인 가독성 확보 */
+  font-family: 'Pretendard', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 감성적인 명조체 클래스 정의 */
+.serif-kr {
+  font-family: 'Nanum Myeongjo', serif;
+  line-height: 1.8; /* 한글은 행간이 넓어야 예쁩니다 */
+  letter-spacing: -0.02em; /* 자간을 살짝 줄여 가독성 향상 */
 }
 
 body {
-	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 1.6;
-	color: #000000;
-	background-color: #ffffff;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-main {
-	width: 100%;
-	max-width: 900px;
-	margin: 0 auto;
-	padding: 6rem 2rem 4rem;
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Playfair Display', Georgia, serif;
-	font-weight: 400;
-	line-height: 1.2;
-	color: #000000;
-	margin: 0 0 1rem 0;
-	letter-spacing: -0.02em;
+.serif {
+  font-family: 'Instrument Serif', serif !important;
 }
 
-h1 {
-	font-size: clamp(2.5rem, 6vw, 4rem);
-	margin-bottom: 2rem;
+.grotesk {
+  font-family: 'Space Grotesk', sans-serif !important;
 }
 
-h2 {
-	font-size: clamp(2rem, 4vw, 3rem);
-	margin-bottom: 1.5rem;
+.text-gradient {
+  background: linear-gradient(135deg, #6366f1, #f43f5e, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-h3 {
-	font-size: clamp(1.5rem, 3vw, 2rem);
+/* 커서 스타일 */
+#cursor-prism,
+#cursor-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  display: none;
 }
 
-h4 {
-	font-size: 1.5rem;
+@media (min-width: 768px) {
+  #cursor-prism,
+  #cursor-dot {
+    display: block;
+  }
 }
 
-h5 {
-	font-size: 1.25rem;
+#cursor-prism {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #6366f1;
+  border-radius: 50%;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    width 0.3s, height 0.3s, border-color 0.3s;
 }
 
-h6 {
-	font-size: 1rem;
-	font-family: 'Inter', sans-serif;
-	font-weight: 500;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
+#cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #f43f5e;
+  border-radius: 50%;
 }
 
-p {
-	margin-bottom: 1.5rem;
-	font-weight: 300;
-	color: #333333;
+/* 애니메이션 */
+.marquee {
+  overflow: hidden;
+  width: 100%;
 }
 
-.prose p {
-	margin-bottom: 2rem;
-	line-height: 1.8;
+.marquee-content {
+  display: flex;
+  gap: 2rem;
+  animation: marquee 30s linear infinite;
+  width: max-content;
 }
 
-strong, b {
-	font-weight: 500;
-	color: #000000;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-a {
-	color: #000000;
-	text-decoration: none;
-	border-bottom: 1px solid #000000;
-	transition: opacity 0.2s ease;
+.hero-title {
+  font-size: clamp(4rem, 16vw, 15rem);
+  line-height: 0.8;
 }
 
-a:hover {
-	opacity: 0.6;
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Forms */
-textarea, input {
-	width: 100%;
-	font-size: 16px;
-	font-family: 'Inter', sans-serif;
-	padding: 0.75rem;
-	border: 1px solid var(--border-color);
-	border-radius: 4px;
-	transition: border-color 0.2s ease;
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
 
-textarea:focus, input:focus {
-	outline: none;
-	border-color: #000000;
+.color-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  animation: blob-float 20s ease-in-out infinite;
+  z-index: 0;
 }
 
-/* Tables */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin: 2rem 0;
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(50px, 50px) scale(1.1);
+  }
 }
 
-th, td {
-	padding: 1rem;
-	text-align: left;
-	border-bottom: 1px solid var(--border-color);
+.pop-button {
+  transition: all 0.3s ease;
 }
 
-th {
-	font-weight: 500;
-	font-size: 0.875rem;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
+.pop-button:hover {
+  transform: scale(1.05);
 }
 
-/* Images */
-img {
-	max-width: 100%;
-	height: auto;
-	display: block;
+.pop-button:active {
+  transform: scale(0.95);
 }
 
-/* Code */
-code {
-	padding: 0.25rem 0.5rem;
-	background-color: #f5f5f5;
-	border: 1px solid var(--border-color);
-	border-radius: 3px;
-	font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-	font-size: 0.9em;
+/* Astro 전환 애니메이션 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-pre {
-	padding: 1.5rem;
-	background-color: #fafafa;
-	border: 1px solid var(--border-color);
-	border-radius: 4px;
-	overflow-x: auto;
-	margin: 2rem 0;
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-pre > code {
-	padding: 0;
-	background: none;
-	border: none;
-	font-size: 0.875rem;
-	line-height: 1.6;
+.animate-in {
+  animation: fade-in 0.5s ease-out;
 }
 
-/* Blockquote */
-blockquote {
-	border-left: 2px solid #000000;
-	padding-left: 2rem;
-	margin: 2rem 0;
-	font-style: italic;
-	font-size: 1.125rem;
-	color: #333333;
+.fade-in {
+  animation: fade-in 0.5s ease-out;
 }
 
-/* Horizontal Rule */
-hr {
-	border: none;
-	border-top: 1px solid var(--border-color);
-	margin: 3rem 0;
+.slide-in-from-bottom-8 {
+  animation: slide-in-from-bottom 0.5s ease-out;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-	body {
-		font-size: 15px;
-	}
-	
-	main {
-		padding: 4rem 1.5rem 3rem;
-	}
+.duration-700 {
+  animation-duration: 0.7s;
 }
 
-/* Accessibility */
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border-width: 0;
-}
-
-/* Selection */
-::selection {
-	background-color: #000000;
-	color: #ffffff;
-}
-
-::-moz-selection {
-	background-color: #000000;
-	color: #ffffff;
+.duration-1000 {
+  animation-duration: 1s;
 }
