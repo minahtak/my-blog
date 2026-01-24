@@ -1,11 +1,11 @@
 /* Tailwind는 자동으로 로드되므로 @tailwind 지시문 제거 */
+/* Google Fonts에서 명조체와 고딕체 호출 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Pretendard:wght@300;400;600&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
-/* Google Fonts에서 명조체와 고딕체 호출 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Pretendard:wght@300;400;600&display=swap');
 
 body {
   /* 기본 폰트를 Pretendard로 설정하여 전반적인 가독성 확보 */
